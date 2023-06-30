@@ -1,10 +1,11 @@
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
 import CoffeeDelivery from '../../assets/main-img.png'
-import mockData from '../../mock/coffees.ts'
+import mockData, { Cafe } from '../../mock/coffees.ts'
+import { ProductCard } from './components/ProductCard.tsx'
 export const Home = () => {
   return (
     <>
-      <main className="flex justify-between overflow-hidden px-40 bg-[url(./assets/bg-main.svg)] bg-cover bg-background py-20">
+      <main className="flex justify-center gap-20 overflow-hidden px-40 bg-[url(./assets/bg-main.svg)] bg-cover py-20">
         {/*Left*/}
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-4">
@@ -48,14 +49,19 @@ export const Home = () => {
         <img src={CoffeeDelivery} alt="" />
       </main>
 
-      <section className="flex px-40 flex-col justify-start bg-background">
-        <h4 className="text-3xl font-alt font-extrabold text-base-subtitle">Nossos Cafés</h4>
-        <div>
+      <div className="flex flex-col items-center pb-20">
+        <h4 className="text-3xl font-alt font-extrabold text-base-subtitle py-8">
+          Nossos Cafés
+        </h4>
+        <div className="grid grid-cols-4 gap-12">
           {
-
+            mockData.map((data: Cafe) => {
+              return <ProductCard key={data.id} cafeInfo={data} />
+            })
           }
         </div>
-      </section>
+      </div>
+
     </>
   )
 }

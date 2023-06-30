@@ -34,6 +34,9 @@ export default {
         sans: ['Roboto', 'sans-serif'],
         alt: ['Baloo\\ 2', 'cursive']
       },
+      borderRadius: {
+        '4xl': '2.25rem',
+      }
     },
   },
   plugins: [require('@tailwindcss/forms')],
