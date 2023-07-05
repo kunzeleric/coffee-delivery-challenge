@@ -101,17 +101,17 @@ export const Checkout = () => {
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4" id="checkout-form">
             <div className="flex flex-col gap-4">
-              <input onChange={handleCep}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label w-52" type="text" placeholder="CEP" />
-              <input onChange={handleRua}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label" type="text" placeholder="Rua" />
+              <input onChange={handleCep}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-52" type="text" placeholder="CEP" />
+              <input onChange={handleRua}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Rua" />
             </div>
             <div className="flex gap-4">
-              <input onChange={handleNumero}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label" type="text" placeholder="Número" />
-              <input onChange={handleComplemento}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label w-full" type="text" placeholder="Complemento" />
+              <input onChange={handleNumero}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Número" />
+              <input onChange={handleComplemento}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-full" type="text" placeholder="Complemento" />
             </div>
             <div className="flex gap-4">
-              <input onChange={handleBairro}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label" type="text" placeholder="Bairro" />
-              <input onChange={handleCidade}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label w-full" type="text" placeholder="Cidade" />
-              <input onChange={handleUf}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label w-14" type="text" placeholder="UF" />
+              <input onChange={handleBairro}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Bairro" />
+              <input onChange={handleCidade}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-full" type="text" placeholder="Cidade" />
+              <input onChange={handleUf}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-14" type="text" placeholder="UF" />
             </div>
           </form>
         </div>

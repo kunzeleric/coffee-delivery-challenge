@@ -1,12 +1,7 @@
-import { useState, createContext, ReactNode, useEffect } from 'react'
+import { useState, createContext, ReactNode, useEffect, useReducer } from 'react'
+import { Item, cartReducer } from '../reducer/carts/reducer'
+import { addItemToCartAction, removeItemFromCartAction, updateCartItemQuantityAction } from '../reducer/carts/actions'
 
-export interface Item {
-    id: number,
-    nome: string,
-    img: string,
-    qtd: number,
-    preco: number
-}
 
 interface CartContextProps {
     cartItems: Item[],
@@ -24,38 +19,37 @@ interface CartContextProviderProps {
 }
 
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] = useState<Item[]>([]);
+    const [cartItemsState, dispatch] = useReducer(cartReducer, { cartItems: [] });
+
     const [totalToPay, setTotalToPay] = useState(0);
     const [deliveryCost, setDeliveryCost] = useState(0);
 
+    const { cartItems } = cartItemsState;
+
     const addItemToCart = (item: Item) => {
-        setCartItems((prevItems) => [...prevItems, item]);
+        dispatch(addItemToCartAction(item))
     }
 
     const removeItemFromCart = (itemId: number) => {
-        setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        dispatch(removeItemFromCartAction(itemId))
     }
+
+    const updateCartItemQuantity = (itemId: number, itemQty: number) => {
+        dispatch(updateCartItemQuantityAction(itemId, itemQty))
+    };
 
     const calculateTotalDue = (items: Item[]) => {
         setTotalToPay(items.reduce((total, item) => total + (item.qtd * item.preco), 0));
     }
 
-    const updateCartItemQuantity = (itemId: number, itemQty: number) => {
-        setCartItems((prevItems) =>
-            prevItems.map((item) =>
-                item.id === itemId ? { ...item, qtd: itemQty } : item
-            )
-        );
-    };
-
     const calculateFreight = (items: Item[]) => {
-        const totalItems = items.reduce((total, item) => total + (item.preco), 0);
+        const totalItems = items.reduce((total, item) => total + (item.qtd), 0);
 
         if (totalItems > 3 && totalItems <= 6) {
             setDeliveryCost(5)
         } else if (totalItems > 6) {
             setDeliveryCost(10)
-        } else if (totalItems > 0){
+        } else if (totalItems > 0) {
             setDeliveryCost(3.50)
         } else {
             setDeliveryCost(0)

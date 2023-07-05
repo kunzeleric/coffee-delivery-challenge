@@ -36,7 +36,7 @@ export default {
       },
       borderRadius: {
         '4xl': '2.25rem',
-      }
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

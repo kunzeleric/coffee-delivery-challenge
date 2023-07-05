@@ -6,7 +6,6 @@ import { CartContext } from '../context/CartContext'
 export const Header = () => {
 
   const { cartItems } = useContext(CartContext)
-
   const totalItems = cartItems.reduce((total, item) => total + (item.qtd), 0);
 
   return (

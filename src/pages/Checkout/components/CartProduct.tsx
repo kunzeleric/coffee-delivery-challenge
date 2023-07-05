@@ -1,6 +1,7 @@
 import { Minus, Plus, Trash } from "@phosphor-icons/react"
-import { CartContext, Item } from "../../../context/CartContext"
+import { CartContext } from "../../../context/CartContext"
 import { useContext } from "react";
+import { Item } from "../../../reducer/carts/reducer";
 
 interface CartProductProps {
     item: Item
