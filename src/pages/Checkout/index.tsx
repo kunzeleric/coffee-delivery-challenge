@@ -3,10 +3,13 @@ import { CartProduct } from "./components/CartProduct"
 import { useContext, useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import { DadosUsuario, FormContext } from "../../context/FormContext";
+import { useNavigate } from "react-router-dom";
+
 
 export const Checkout = () => {
+  const navigate = useNavigate();
 
-  const { cartItems, totalToPay, deliveryCost } = useContext(CartContext);
+  const { cartItems, totalToPay, deliveryCost, clearCart } = useContext(CartContext);
   const { handleFormOrder } = useContext(FormContext);
 
   const [selectedPayment, setSelectedPayment] = useState(0);
@@ -64,8 +67,11 @@ export const Checkout = () => {
         uf: uf,
         metodoPagamento: metodoPagamento
     }
-
+    
     handleFormOrder(formUsuario);
+    clearCart();
+    navigate("/success")
+    
   }
 
   useEffect(() => {
@@ -101,17 +107,17 @@ export const Checkout = () => {
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4" id="checkout-form">
             <div className="flex flex-col gap-4">
-              <input onChange={handleCep}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-52" type="text" placeholder="CEP" />
-              <input onChange={handleRua}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Rua" />
+              <input onChange={handleCep}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-52" type="text" placeholder="CEP" required />
+              <input onChange={handleRua}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Rua" required />
             </div>
             <div className="flex gap-4">
-              <input onChange={handleNumero}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Número" />
+              <input onChange={handleNumero}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Número" required />
               <input onChange={handleComplemento}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-full" type="text" placeholder="Complemento" />
             </div>
             <div className="flex gap-4">
-              <input onChange={handleBairro}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Bairro" />
-              <input onChange={handleCidade}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-full" type="text" placeholder="Cidade" />
-              <input onChange={handleUf}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-14" type="text" placeholder="UF" />
+              <input onChange={handleBairro}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark" type="text" placeholder="Bairro" required />
+              <input onChange={handleCidade}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-full" type="text" placeholder="Cidade" required />
+              <input onChange={handleUf}className="text-base-text rounded-md bg-base-input border-base-button placeholder:text-base-label focus:ring-yellow-dark focus:border-yellow-dark w-14" type="text" placeholder="UF" required />
             </div>
           </form>
         </div>
@@ -166,7 +172,7 @@ export const Checkout = () => {
             }
           </div>
           {
-            cartItems ?
+            cartItems.length > 0 ?
 
               (<div className="flex flex-col">
                 <div className="flex flex-col py-6 gap-3">
@@ -185,6 +191,7 @@ export const Checkout = () => {
                 </div>
                 <button
                   form="checkout-form"
+                  type="submit"
                   className="border-0 bg-yellow hover:bg-yellow-dark px-28 py-2 uppercase rounded-md text-white font-bold"
                 >
                   Confirmar pedido
@@ -210,6 +217,7 @@ export const Checkout = () => {
                 </div>
                 <button
                   form="checkout-form"
+                  type="submit"
                   className="border-0 bg-yellow hover:bg-yellow-dark px-28 py-2 uppercase rounded-md text-white font-bold"
                 >
                   Confirmar pedido

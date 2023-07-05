@@ -24,8 +24,6 @@ export const CartProduct = ({ item }: CartProductProps) => {
         removeItemFromCart(item.id);
     }
 
-    const coffeeQuantity = cartItems.reduce((total, item) => total + item.qtd, 0);
-
     return (
         <div className="flex items-center gap-6 pb-6 border-b-[1px] border-base-hover">
             <img src={item.img} alt="" />
@@ -36,7 +34,7 @@ export const CartProduct = ({ item }: CartProductProps) => {
                         <span onClick={handleReduceCoffee} className="text-purple text-md hover:text-purple-dark cursor-pointer">
                             <Minus />
                         </span>
-                        <p>{coffeeQuantity}</p>
+                        <p>{item.qtd}</p>
                         <span onClick={handleAddCoffee} className="text-purple text-md hover:text-purple-dark cursor-pointer">
                             <Plus />
                         </span>

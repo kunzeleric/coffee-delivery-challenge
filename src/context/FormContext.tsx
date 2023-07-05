@@ -26,6 +26,7 @@ export const FormContextProvider = ({ children }: FormContextProviderProps) => {
     const [formOrder, setFormOrder] = useState({} as DadosUsuario)
 
     const handleFormOrder = (order: DadosUsuario) => {
+        console.log(order)
         setFormOrder(order);
     }
 

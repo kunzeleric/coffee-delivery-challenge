@@ -1,6 +1,6 @@
 import { useState, createContext, ReactNode, useEffect, useReducer } from 'react'
 import { Item, cartReducer } from '../reducer/carts/reducer'
-import { addItemToCartAction, removeItemFromCartAction, updateCartItemQuantityAction } from '../reducer/carts/actions'
+import { addItemToCartAction, removeItemFromCartAction, updateCartItemQuantityAction, clearCartAction } from '../reducer/carts/actions'
 
 
 interface CartContextProps {
@@ -9,7 +9,8 @@ interface CartContextProps {
     deliveryCost: number,
     addItemToCart: (item: Item) => void,
     removeItemFromCart: (itemId: number) => void,
-    updateCartItemQuantity: (itemId: number, itemQty: number) => void
+    updateCartItemQuantity: (itemId: number, itemQty: number) => void,
+    clearCart: () => void
 }
 
 export const CartContext = createContext({} as CartContextProps)
@@ -37,6 +38,10 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const updateCartItemQuantity = (itemId: number, itemQty: number) => {
         dispatch(updateCartItemQuantityAction(itemId, itemQty))
     };
+
+    const clearCart = () => {
+        dispatch(clearCartAction());
+    }
 
     const calculateTotalDue = (items: Item[]) => {
         setTotalToPay(items.reduce((total, item) => total + (item.qtd * item.preco), 0));
@@ -67,6 +72,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
                 addItemToCart,
                 removeItemFromCart,
                 updateCartItemQuantity,
+                clearCart,
                 cartItems,
                 deliveryCost,
                 totalToPay

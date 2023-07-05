@@ -1,14 +1,15 @@
 import { Minus, Plus, ShoppingCart } from '@phosphor-icons/react'
 import { Cafe } from '../../../mock/coffees'
 import { useContext, useState } from 'react'
-import { CartContext, Item } from '../../../context/CartContext'
+import { CartContext } from '../../../context/CartContext'
+import { Item } from '../../../reducer/carts/reducer'
 interface ProductCardProps {
   cafeInfo: Cafe
 }
 
 export const ProductCard = ({ cafeInfo }: ProductCardProps) => {
 
-  const { addItemToCart } = useContext(CartContext);
+  const { addItemToCart, cartItems, updateCartItemQuantity } = useContext(CartContext);
   const [coffeeQuantity, setCoffeeQuantity] = useState(0);
 
   const handleAdd = () => {
@@ -31,7 +32,15 @@ export const ProductCard = ({ cafeInfo }: ProductCardProps) => {
       preco: 9.90
     }
 
-    addItemToCart(item);
+    const existingItem = cartItems.find(item => item.id === cafeInfo.id);
+
+    if(!existingItem){
+      addItemToCart(item);
+      setCoffeeQuantity(0);
+    } else {
+      updateCartItemQuantity(existingItem.id, coffeeQuantity + existingItem.qtd);
+      setCoffeeQuantity(0);
+    }
   }
 
   return (
