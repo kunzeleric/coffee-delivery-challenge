@@ -8,7 +8,7 @@ interface CartProductProps {
 }
 
 export const CartProduct = ({ item }: CartProductProps) => {
-    const { removeItemFromCart, updateCartItemQuantity, cartItems } = useContext(CartContext)
+    const { removeItemFromCart, updateCartItemQuantity } = useContext(CartContext)
 
     const handleAddCoffee = () => {
         updateCartItemQuantity(item.id, item.qtd + 1)
