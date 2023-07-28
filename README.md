@@ -16,4 +16,21 @@ Finally, the user is led to a success page with information regarding delivery a
 - Improve tailwind knowledge.
 - Improve project structuring and clean code.
   
-### WORK IN PROGRESS!
+## Take Aways
+
+I'm super proud to implement the useReduce and useContext logic in this project. 
+I finally got a grip on how to handle these hooks after this exercise.
+
+## Setup
+
+After cloning or downloading the project, use the commands below in the terminal.
+
+```bash
+  cd my-project
+  npm install my-project
+  npm run dev
+```
+    
+## Author
+
+- [@kunzeleric](https://www.github.com/kunzeleric)
